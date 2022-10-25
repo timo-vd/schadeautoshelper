@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "Schadeautos.nl helper",
+  "description": "opend een de zoekpagina van dezelfde auto op autoscout.nl",
+  "permissions": ["storage", "tabs"],
+  "background": 
+  {
+    "service_worker": "background.js"
+  },
+  "content_scripts": 
+  [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["contentScript.js"]
+    }  
+  ],
+  "version": "1.0",
+  "action": 
+  {
+    "default_popup": "popup.html"
+  }
+}
