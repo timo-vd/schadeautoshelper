@@ -1,16 +1,24 @@
 // functie om de goede data uit de table te halen.
 function selectData(temp){
-  const rows = document.querySelectorAll('body > section:nth-child(5) > div > div > div.col9.col12-sm.content > div.col12.m-b-lg.specifications > table > tbody > tr');
+  let rows = document.querySelectorAll('div.col12.m-b-lg.specifications > table > tbody > tr');
   let temp2;
+  const filter = ["Mercedes"];
 
   rows.forEach(row => {
-    if(row.firstChild.innerHTML == temp)
+    if(row.firstChild.innerHTML == temp && row.children[1].textContent != filter)
     {
-      console.log(row.children[1].textContent);
       temp2 = row.children[1].textContent;
-      return;
+    }
+    else
+    {
+      if(row.children[1].textContent == "Mercedes")
+      {
+        console.log("Mercedes gevonden dus gefilterd naar Mercedes-Benz");
+        temp2 = "Mercedes-benz";
+      }
     }
   });
+  console.log(temp2);
   return temp2;
 }
 
@@ -25,6 +33,7 @@ let carData =
   tellerstand:  selectData("tellerstand:").split(" ")[0]
 };
 
+console.log(carData);
 // message naar background script
 chrome.runtime.sendMessage(carData, function(response) {
   console.log(response.farewell);
